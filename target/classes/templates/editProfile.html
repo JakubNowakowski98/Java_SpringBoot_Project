@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"></head>
+    <body>
+
+        <div th:include="layout :: navigationPanel"></div>
+
+        <h1>Edytuj swój profil</h1>
+            <form th:action="@{/editProfile}" method="post" th:object="${user}">
+                <div th:if="${#fields.hasErrors('name')}">
+                    <p th:errors="*{name}"></p>
+                </div>
+                <input type="text" th:field="*{name}" placeholder="Imię"/>
+
+                <div th:if="${#fields.hasErrors('surname')}">
+                    <p th:errors="*{surname}"></p>
+                </div>
+                <input type="text" th:field="*{surname}" placeholder="Nazwisko"/>
+
+                <div th:if="${#fields.hasErrors('login')}">
+                    <p th:errors="*{login}"></p>
+                </div>
+                <input type="text" th:field="*{login}" placeholder="Login"/>
+
+                <div th:if="${#fields.hasErrors('password')}">
+                    <p th:errors="*{password}"></p>
+                </div>
+                <input type="password" th:field="*{password}" placeholder="Hasło"/>
+
+                <button type="submit" class="btn">Zapisz zmiany</button>
+                <a th:href="@{/deleteAccount}" class="btn">Usuń konto</a>
+            </form>
+        <div th:include="layout :: footer"></div>
+
+    </body>
+</html>

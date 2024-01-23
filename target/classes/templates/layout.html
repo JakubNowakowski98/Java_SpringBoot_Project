@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Projekt zaliczeniowy</title>
+        <style>
+            body {
+                background-color: #333; /* Graphite background color */
+                color: white; /* White text color */
+                text-align: center; /* Center align content */
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif; /* Choose a suitable font */
+                padding-bottom: 50px;
+            }
+
+            .nav {
+                display: flex;
+                justify-content: center; /* Center align navigation */
+                margin-top: 20px; /* Add some space at the top */
+            }
+
+            .nav > li {
+                display: inline;
+                background: black; /* Black button background color */
+                margin-right: 5px; /* Add some space between buttons */
+            }
+
+            .nav a {
+                text-decoration: none;
+                color: white; /* White text color for links */
+                padding: 10px; /* Add padding to buttons for better visibility */
+            }
+
+            th,
+            td {
+                border: solid 1px black;
+                padding: 5px;
+                text-align: center; /* Center align table content */
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: black; /* Button background color */
+                color: white; /* Button text color */
+                text-decoration: none;
+                border-radius: 5px; /* Add some border-radius for rounded corners */
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center; /* Center align footer */
+                background-color: #222; /* Kolor tła stopki */
+            }
+            .center-table {
+                margin: 0 auto; /* Ustawia marginesy poziome na auto, co wyśrodkuje element */
+            }
+            .form-container {
+                display: flex;
+                justify-content: space-between;
+                max-width: 1200px;
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            .search-container,
+            .add-song-container {
+                flex: 0 0 48%; /* Możesz dostosować szerokość według własnych preferencji */
+            }
+
+            .search-container input,
+            .add-song-container a {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div th:fragment="navigationPanel">
+            <ul class="nav">
+                <li sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/register}">Zarejestruj się</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/profile}">Strona główna</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/playlists}">Twoje playlisty</a></li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}">Zaloguj się</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/editProfile}">Edytuj profil</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Wyloguj się</a></li>
+            </ul>
+        </div>
+        <div>
+            <!-- Your main content goes here -->
+            <table>
+                <!-- Your table content goes here -->
+            </table>
+        </div>
+        <div th:fragment="footer">
+            <footer class="footer"><hr/>
+                <p>Projekt zaliczeniowy - Jakub Nowakowski</p>
+            </footer>
+        </div>
+    </body>
+</html>

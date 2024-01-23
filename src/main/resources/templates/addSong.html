@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"> </head>
+    <body>
+
+        <div th:include="layout :: navigationPanel"></div>
+
+        <h1>
+            <span>Dodaj piosenkę do playlisty: </span>
+            <span th:text="${playlist.playlistName}"></span>
+        </h1>
+
+        <form th:action="@{'/playlist/' + ${playlist.playlistId} + '/addSong'}" th:object="${song}" method="post">
+            <label for="author">Autor:</label>
+            <div th:if="${#fields.hasErrors('author')}">
+                <p th:errors="*{author}"></p>
+            </div>
+            <input type="text" th:field="*{author}" />
+
+            <label for="title">Tytuł:</label>
+            <div th:if="${#fields.hasErrors('title')}">
+                <p th:errors="*{title}"></p>
+            </div>
+            <input type="text" th:field="*{title}" />
+
+            <label for="category">Kategoria:</label>
+            <div th:if="${#fields.hasErrors('category')}">
+                <p th:errors="*{category}"></p>
+            </div>
+            <input type="text" th:field="*{category}" />
+
+            <label for="youtubeLink">Link do YouTube:</label>
+            <div th:if="${#fields.hasErrors('youtubeLink')}">
+                <p th:errors="*{youtubeLink}"></p>
+            </div>
+            <input type="text" th:field="*{youtubeLink}" />
+
+            <button type="submit">Dodaj piosenkę</button>
+        </form>
+
+        <div th:include="layout :: footer"></div>
+    </body>
+</html>

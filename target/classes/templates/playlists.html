@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"> </head>
+    <body>
+
+        <div th:include="layout :: navigationPanel"></div>     
+
+        <a th:href="@{/addPlaylist}" class="btn">Utwórz nową playlistę</a>
+
+        <h1>Oto Twoje playlisty:</h1>
+
+        <table border="1" class="center-table">
+            <tbody th:each="playlist : ${playlists}">
+                <tr>
+                    <td>
+                        <a th:href="@{'/playlist/' + ${playlist.playlistId}}" th:text="${playlist.playlistName}" class="btn"></a>
+                    </td>
+                    <td>
+                        <form th:action="@{'/editPlaylist/' + ${playlist.playlistId}}" method="post" style="display: inline;">
+                            <button type="submit" class="btn">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/deletePlaylist/' + ${playlist.playlistId}}" method="post" style="display: inline;" onsubmit="return confirm('Czy na pewno chcesz usunąć playlistę?')">
+                            <button type="submit" class="btn">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div th:include="layout :: footer"></div>
+    </body>
+</html>

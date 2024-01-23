@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang= "pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"> </head>
+    <body>
+        <div th:include="layout :: navigationPanel"></div>
+        
+        <form th:action="@{/addPlaylist}" method="POST" th:object="${playlist}">
+            <div th:if="${#fields.hasErrors('playlistName')}">
+                <p th:errors="*{playlistName}"></p>
+            </div>
+            <input type="text" th:field="*{playlistName}" placeholder="Nazwa playlisty"/>
+            <input type="hidden" name="userId" th:value="${user.getUserid()}"/>
+            <button type="submit" class="btn">Utwórz nową playlistę</button>
+        </form>
+        
+        <div th:include="layout :: footer"></div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="layout :: head"> </head>
+    <body>
+
+        <div th:include="layout :: navigationPanel"></div>
+
+        <div class="form-container">
+            <div class="search-container">
+                <form th:action="@{'/playlist/' + ${playlist.playlistId} + '/searchSongs'}" method="get">
+                    <h2>Wyszukaj po parametrze</h2>
+                    <div>
+                        <label for="author">Autor:</label>
+                        <input type="text" id="author" name="author" th:value="${author}" />
+                    </div>
+                    <div>
+                        <label for="title">Tytuł:</label>
+                        <input type="text" id="title" name="title" th:value="${title}" />
+                    </div>
+                    <div>
+                        <label for="category">Kategoria:</label>
+                        <input type="text" id="category" name="category" th:value="${category}" />
+                    </div>
+                    <button type="submit" class="btn">Szukaj</button>
+                </form>
+            </div>
+
+            <div class="add-song-container">
+                <h2>Dodaj piosenkę</h2>
+                <a th:href="@{'/playlist/' + ${playlist.playlistId} + '/addSong'}" class="btn">Dodaj nową piosenkę</a>
+            </div>
+        </div>
+
+        <table class="center-table">
+            <thead>
+                <tr>
+                    <th>Autor</th>
+                    <th>Tytuł</th>
+                    <th>Kategoria</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="song : ${songs}">
+                    <td th:text="${song.author}"></td>
+                    <td th:text="${song.title}"></td>
+                    <td th:text="${song.category}"></td>
+                    <td><a th:href="${song.youtubeLink}" class="btn">Odtwórz</a></td>
+                    <td>
+                        <form th:action="@{'/playlist/' + ${playlist.playlistId} + '/editSong/' + ${song.songId}}" method="get">
+                            <button type="submit" class="btn">Edytuj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/playlist/' + ${playlist.playlistId} + '/deleteSong/' + ${song.songId}}" method="post" onsubmit="return confirm('Czy na pewno chcesz usunąć piosenkę?')">
+                            <button type="submit" class="btn">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div th:include="layout :: footer"></div>
+    </body>
+</html>
